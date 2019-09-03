@@ -1,139 +1,47 @@
-# CodeIgniter Composer Installer
+# Ciclomontaña
+Prueba para FrePort Store.
 
-[![Latest Stable Version](https://poser.pugx.org/kenjis/codeigniter-composer-installer/v/stable)](https://packagist.org/packages/kenjis/codeigniter-composer-installer) [![Total Downloads](https://poser.pugx.org/kenjis/codeigniter-composer-installer/downloads)](https://packagist.org/packages/kenjis/codeigniter-composer-installer) [![Latest Unstable Version](https://poser.pugx.org/kenjis/codeigniter-composer-installer/v/unstable)](https://packagist.org/packages/kenjis/codeigniter-composer-installer) [![License](https://poser.pugx.org/kenjis/codeigniter-composer-installer/license)](https://packagist.org/packages/kenjis/codeigniter-composer-installer)
+## Instalación
 
-This package installs the offical [CodeIgniter](https://github.com/bcit-ci/CodeIgniter) (version `3.1.*`) with secure folder structure via Composer.
+ - Preparar el ambiente
+	 - Se recomienda usar **MAMP** o **XAMPP** para ejecutar el proyecto de forma sencilla.
+	 - Iniciar los servicios **Apache** y **MySql**.
+ - Clonar el repositorio (en *htdocs*).
+ - Crear la Base de Datos "**ciclomontana**".
+ - Importar el archivo "**ciclomontana_db.sql**" en la Base de Datos creada.
+ - Editar el archivo "*carpeta_proyecto*/application/config/**database.php**" con los datos del usuario de la Base de Datos, Host y Base de Datos (si fue cambiada).
+ - Situarse en la "*carpeta_proyecto*" por consola y ejecutar "**composer install**".
+ - El proyecto debe estar ejecutándose en una ruta igual o parecida a "[**http://localhost/*carpeta_proyecto*/public**](http://localhost/carpeta_proyecto/public)" (validar los puertos).
 
-**Note:** If you want to install CodeIgniter4 (under development), see <https://github.com/kenjis/codeigniter-composer-installer/tree/4.x>.
+## Datos de acceso
 
-You can update CodeIgniter system folder to latest version with one command.
+ - **Email**: johnwainer@gmail.com
+ - **Contraseña**: 12345
 
-## Folder Structure
+## Recorrido breve
 
-```
-codeigniter/
-├── application/
-├── composer.json
-├── composer.lock
-├── public/
-│   ├── .htaccess
-│   └── index.php
-└── vendor/
-    └── codeigniter/
-        └── framework/
-            └── system/
-```
+ - Al ingresar se llega a los reportes solicitados
+	 - En gráfica de "**Pie**" se encuentra la distribución de **Visitas a Clientes por Ciudad**.
+	 - En la gráfica de "**barras**" se encuentra en movimiento del **Saldo del Cupo de los clientes por fechas** (Esta gráfica es dinámica y se refresca dependiendo del cliente que se tenga seleccionado en la lista sobre esta).
+ - En el menú superior se encuentran los links a **clientes** y **vistas**, allí se verán los listados de estos, se pueden *crear*, *editar* y *eliminar*.
 
-## Requirements
+## Consideraciones técnicas
 
-* PHP 5.3.7 or later
-* `composer` command (See [Composer Installation](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx))
-* Git
+En general el sistema funciona con **MVC**, se utilizó **ajax** para agregar dinamismo en el cálculo del "*Valor visita*" y en la generación de reportes gráficos en el escritorio.
 
-## How to Use
+ - **Framework**: Codeigniter 3.1 (composer install)
+ - **Css Framework**: Bootstrap 4
+ - **Librería javascript**: jQuery
+ - **Gráficas reporte**: jquery.canvasjs.min.js
+ - **Base de Datos**: MySql
+ - **Modelo de datos**:
+![enter image description here](http://johnwainer.com/bd.png)
 
-### Install CodeIgniter
+## Restricciones del sistema
 
-```
-$ composer create-project kenjis/codeigniter-composer-installer codeigniter
-```
-
-Above command installs `public/.htaccess` to remove `index.php` in your URL. If you don't need it, please remove it.
-
-And it changes `application/config/config.php`:
-
-~~~
-$config['composer_autoload'] = FALSE;
-↓
-$config['composer_autoload'] = realpath(APPPATH . '../vendor/autoload.php');
-~~~
-
-~~~
-$config['index_page'] = 'index.php';
-↓
-$config['index_page'] = '';
-~~~
-
-#### Install Translations for System Messages
-
-If you want to install translations for system messages:
-
-```
-$ cd /path/to/codeigniter
-$ php bin/install.php translations 3.1.0
-```
-
-#### Install Third Party Libraries
-
-[Codeigniter Matches CLI](https://github.com/avenirer/codeigniter-matches-cli):
-
-```
-$ php bin/install.php matches-cli master
-```
-
-[CodeIgniter HMVC Modules](https://github.com/jenssegers/codeigniter-hmvc-modules):
-
-```
-$ php bin/install.php hmvc-modules master
-```
-
-[Modular Extensions - HMVC](https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc):
-
-```
-$ php bin/install.php modular-extensions-hmvc codeigniter-3.x
-```
-
-[Ion Auth](https://github.com/benedmunds/CodeIgniter-Ion-Auth):
-
-```
-$ php bin/install.php ion-auth 2
-```
-
-[CodeIgniter3 Filename Checker](https://github.com/kenjis/codeigniter3-filename-checker):
-
-```
-$ php bin/install.php filename-checker master
-```
-
-[CodeIgniter Rest Server](https://github.com/chriskacerguis/codeigniter-restserver):
-
-```
-$ php bin/install.php restserver 2.7.2
-```
-[CodeIgniter Developer Toolbar](https://github.com/JCSama/CodeIgniter-develbar):
-
-```
-$ php bin/install.php codeigniter-develbar master
-```
-
-### Run PHP built-in server (PHP 5.4 or later)
-
-```
-$ cd /path/to/codeigniter
-$ bin/server.sh
-```
-
-### Update CodeIgniter
-
-```
-$ cd /path/to/codeigniter
-$ composer update
-```
-
-You must update files manually if files in `application` folder or `index.php` change. Check [CodeIgniter User Guide](http://www.codeigniter.com/user_guide/installation/upgrading.html).
-
-## Reference
-
-* [Composer Installation](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
-* [CodeIgniter](https://github.com/bcit-ci/CodeIgniter)
-* [Translations for CodeIgniter System](https://github.com/bcit-ci/codeigniter3-translations)
-
-## Related Projects for CodeIgniter 3.x
-
-* [Cli for CodeIgniter 3.0](https://github.com/kenjis/codeigniter-cli)
-* [ci-phpunit-test](https://github.com/kenjis/ci-phpunit-test)
-* [CodeIgniter Simple and Secure Twig](https://github.com/kenjis/codeigniter-ss-twig)
-* [CodeIgniter Doctrine](https://github.com/kenjis/codeigniter-doctrine)
-* [CodeIgniter Deployer](https://github.com/kenjis/codeigniter-deployer)
-* [CodeIgniter3 Filename Checker](https://github.com/kenjis/codeigniter3-filename-checker)
-* [CodeIgniter Widget (View Partial) Sample](https://github.com/kenjis/codeigniter-widgets)
+ - Todas las URLs y Servicios creados están protegidos por un validador de sesión desde el constructor de cada controlador.
+ - Se agregaron las llaves foráneas necesarias y borrado en cascada en cada una de ellas.
+	 - Por ejemplo si se borra un cliente, se borrarán las visitas asociadas a este.
+ - Cuando se **agrega** o **elimina** una visita, se actualiza el "***Saldo cupo***" en el cliente.
+ - Cuando se **edita** un **cliente**, **NO** se permite cambiar "*NIT*" (se solicitó guardar encriptado), "*Cupo*" o "*Porcentaje visitas*", para garantizar la integridad de los datos y no hacer más extenso el proceso de actualización de "*Saldo cupo*".
+ - Cuando se **edita** una **visita**, **NO** se permite cambiar "*Cliente*", "*Valor neto*" o "*Valor visita*", para garantizar la integridad de los datos y no hacer más extenso el proceso de actualización de "*Saldo cupo*".
