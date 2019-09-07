@@ -1,3 +1,17 @@
+# Modificaciones necesarias para la última versión:
+
+##### Para exponer y recibir correctamente datos en los servicios POST, GET, PUT en Codeigniter, se debe hacer el siguiente ajuste en el apache:
+
+**- cd /etc/apache2/mods-enabled/**
+ - locate mod_rewrite
+
+**- /usr/lib/apache2/modules/mod_rewrite.so**
+ - touch rewrite.load
+ - nano rewrite.load
+ 
+
+------------
+
 # Ciclomontaña
 Prueba para FrePort Store.
 
