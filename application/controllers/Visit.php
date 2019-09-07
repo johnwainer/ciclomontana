@@ -1,4 +1,5 @@
 <?php
+header('Access-Control-Allow-Origin: *');
 class Visit extends CI_Controller {
   
     public function __construct()
@@ -10,12 +11,14 @@ class Visit extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        if (!$this->session->userdata('email'))
-			redirect('user/login');
+        /*if (!$this->session->userdata('email'))
+			redirect('user/login');*/
     }
   
     public function index()
     {
+        if (!$this->session->userdata('email'))
+            redirect('user/login');
         $data['visits'] = $this->visit_model->visits_list();
  
         $this->load->view('visits/list', $data);
@@ -23,6 +26,8 @@ class Visit extends CI_Controller {
   
     public function create()
     {
+        if (!$this->session->userdata('email'))
+            redirect('user/login');
         $data['clients'] =  $this->client_model->clients_list();
         $data['sellers'] =  $this->seller_model->sellers_list();
         if($this->input->post('price')){
@@ -41,6 +46,8 @@ class Visit extends CI_Controller {
 
     public function edit($id)
     {
+        if (!$this->session->userdata('email'))
+            redirect('user/login');
         if (empty($id)){ 
             show_404();
         }else{
@@ -58,6 +65,8 @@ class Visit extends CI_Controller {
      
     public function delete()
     {
+        if (!$this->session->userdata('email'))
+            redirect('user/login');
         $id = $this->uri->segment(3);
          
         if (empty($id))
@@ -75,11 +84,30 @@ class Visit extends CI_Controller {
 
     public function get_count_visits_by_city()
     {
+        if (!$this->session->userdata('email'))
+            redirect('user/login');
         echo json_encode($this->visit_model->get_count_visits_by_city());
     }
 
     public function get_visits_by_user_id($id)
     {
+        if (!$this->session->userdata('email'))
+            redirect('user/login');
         echo json_encode($this->visit_model->get_visits_by_user_id($id));
+    }
+
+
+    /***** Services *******/
+
+    public function visits_list_service()
+    {
+        $query = $this->visit_model->visits_list();
+        $this->output->set_content_type('application/json')->set_output(json_encode($query));
+    }
+
+    public function get_count_visits_by_city_service()
+    {
+        $query = $this->visit_model->get_count_visits_by_city();
+        $this->output->set_content_type('application/json')->set_output(json_encode($query));
     }
 }
