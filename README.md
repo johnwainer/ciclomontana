@@ -1,3 +1,6 @@
+# Actualizar la Base de Datos
+------------
+
 # Modificaciones necesarias para la última versión:
 
 ##### Para exponer y recibir correctamente datos en los servicios POST, GET, PUT en Codeigniter, se debe hacer el siguiente ajuste en el apache:
