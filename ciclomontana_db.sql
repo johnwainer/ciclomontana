@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `password`, `date_added`) VALUES
-(1, 'John', 'Valencia', 'johnwainer@gmail.com', '$2y$10$8mVSGv/bIGgcvCikXBPfTunmcnytIULgA1yLiiSSVKH2j/ViNV0j6', '2019-08-31 23:09:10');
+(1, 'John', 'Valencia', 'johnwainer@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', '2019-08-31 23:09:10');
 
 -- --------------------------------------------------------
 
