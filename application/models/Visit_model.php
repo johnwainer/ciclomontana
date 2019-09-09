@@ -99,6 +99,7 @@ class Visit_model extends CI_Model {
     public function delete($id)
     {
         $this->db->where('id', $id);
-        return $this->db->delete('visits');
+        $this->db->delete('visits');
+        return 'Visita eliminada correctamente.';
     }
 }

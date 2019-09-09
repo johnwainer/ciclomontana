@@ -5,6 +5,19 @@ class Client_model extends CI_Model {
     {
         $this->load->database();
     }
+
+    public function user_login($email, $pass)
+    {
+        $this->db->select('use.email, use.first_name, use.user_id');
+        $this->db->where('email', $email);
+        $this->db->where('password', $pass);
+        $this->db->from('users use');
+        $aResult = $this->db->get();
+        if(!$aResult->num_rows() == 1){
+            return false;
+        }
+        return $aResult->result();
+    }
      
     public function clients_list()
     {
@@ -67,6 +80,10 @@ class Client_model extends CI_Model {
         if(!$aResult->num_rows() == 1){
             return false;
         }
+
+        if($value == '')
+            $value = 0;
+
         $aResult = $aResult->row();
         $quota_balance = $aResult->quota_balance;
         $diferenceValue = $quota_balance + $value;
@@ -118,7 +135,10 @@ class Client_model extends CI_Model {
      
     public function delete($id)
     {
+        $this->db->where('clients_id', $id);
+        $this->db->delete('visits');
         $this->db->where('id', $id);
-        return $this->db->delete('clients');
+        $this->db->delete('clients');
+        return 'Cliente eliminado correctamente.';
     }
 }

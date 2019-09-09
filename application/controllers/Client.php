@@ -5,7 +5,7 @@ class Client extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(['client_model', 'city_model']);
+        $this->load->model(['client_model', 'city_model', 'seller_model']);
         $this->load->helper('url_helper');
         $this->load->library(['session']);
         $this->load->helper('form');
@@ -112,6 +112,18 @@ class Client extends CI_Controller {
         $this->output->set_content_type('application/json')->set_output(json_encode($query));
     }
 
+    public function clients_list_by_id_service($id)
+    {
+        $query = $this->client_model->get_clients_by_id($id);
+        $this->output->set_content_type('application/json')->set_output(json_encode($query));
+    }
+
+    public function sellers_list_service()
+    {
+        $query = $this->seller_model->sellers_list();
+        $this->output->set_content_type('application/json')->set_output(json_encode($query));
+    }
+
     public function cities_list_service()
     {
         $query = $this->city_model->cities_list();
@@ -119,10 +131,33 @@ class Client extends CI_Controller {
     }
 
     public function clients_create_service()
-    {
+    {        
         $query = $this->client_model->createOrUpdate();
         $this->output->set_content_type('application/json')->set_output(json_encode($query));
+    }
 
+    public function clients_update_service()
+    {        
+        $query = $this->client_model->createOrUpdate();
+        $this->output->set_content_type('application/json')->set_output(json_encode($query));
+    }
+
+    public function clients_delete_service()
+    {        
+        $query = $this->client_model->delete($_POST['id']);
+        $this->output->set_content_type('application/json')->set_output(json_encode($query));
+    }
+
+    public function login_service()
+    {   
+        $query = $this->client_model->user_login($_POST['email'], $_POST['password']);
+        $this->output->set_content_type('application/json')->set_output(json_encode($query));
+    }
+
+    public function client_visits_percentage_service($id)
+    {
+        $query = $this->client_model->get_clients_visits_percentage_by_id($id);
+        $this->output->set_content_type('application/json')->set_output(json_encode($query));
     }
 
 }

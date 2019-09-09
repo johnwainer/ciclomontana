@@ -105,9 +105,42 @@ class Visit extends CI_Controller {
         $this->output->set_content_type('application/json')->set_output(json_encode($query));
     }
 
+    public function sellers_list_service()
+    {
+        $query = $this->seller_model->sellers_list();
+        $this->output->set_content_type('application/json')->set_output(json_encode($query));
+    }
+
+    public function visits_list_by_id_service($id)
+    {
+        $query = $this->visit_model->get_visits_by_id($id);
+        $this->output->set_content_type('application/json')->set_output(json_encode($query));
+    }
+
     public function get_count_visits_by_city_service()
     {
         $query = $this->visit_model->get_count_visits_by_city();
+        $this->output->set_content_type('application/json')->set_output(json_encode($query));
+    }
+
+    public function visits_create_service()
+    {        
+        $query = $this->visit_model->createOrUpdate();
+        $this->output->set_content_type('application/json')->set_output(json_encode($query));
+    }
+
+    public function visits_update_service()
+    {        
+        $query = $this->visit_model->createOrUpdate();
+        $this->output->set_content_type('application/json')->set_output(json_encode($query));
+    }
+
+    public function visits_delete_service()
+    {        
+        $dataToRevert = $this->visit_model->get_data_before_delete($_POST['id']);
+        if($this->client_model->revert_quota_balance($dataToRevert->clients_id, $dataToRevert->visit_price))
+            $query = $this->visit_model->delete($_POST['id']);
+
         $this->output->set_content_type('application/json')->set_output(json_encode($query));
     }
 }
